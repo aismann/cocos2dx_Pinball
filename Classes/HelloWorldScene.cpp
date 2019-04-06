@@ -24,6 +24,9 @@
 
 #include "HelloWorldScene.h"
 #include "SimpleAudioEngine.h"
+#include "EffectSprite.h"//纹理
+#include "LightEffect.h"//光源
+
 
 USING_NS_CC;
 
@@ -47,6 +50,21 @@ bool HelloWorld::init()
         return false;
     }
 
+	
+	auto pinBallSprite = EffectSprite::create("Pinball.png");//纹理原图
+	pinBallSprite->setPosition(200,200);
+	pinBallSprite->setScale(0.2);
+	this->addChild(pinBallSprite, 1);
+	
+	auto pointLight = LightEffect::create();//光源
+	pointLight->retain();//保持光源
+	Vec3 lightPos(100, 100, 100);
+	pointLight->setLightPos(lightPos);
+	pointLight->setLightCutoffRadius(1000);//无影响半径
+	pointLight->setBrightness(1.0);//亮度
+//	pointLight->setLightColor(cocos2d::Color3B::WHITE);//颜色
+	pinBallSprite->setEffect(pointLight, "Pinball_n.png");//纹理+光源
+	
 
     return true;
 }

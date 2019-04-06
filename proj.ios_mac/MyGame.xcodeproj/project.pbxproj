@@ -21,12 +21,6 @@
 		294D0D641D0D56D500F7F5D4 /* CoreText.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 294D0D631D0D56D500F7F5D4 /* CoreText.framework */; };
 		3EACC98F19EE6D4300EB3C5E /* res in Resources */ = {isa = PBXBuildFile; fileRef = 3EACC98E19EE6D4300EB3C5E /* res */; };
 		3EACC99019EE6D4300EB3C5E /* res in Resources */ = {isa = PBXBuildFile; fileRef = 3EACC98E19EE6D4300EB3C5E /* res */; };
-		46880B7B19C43A67006E1F66 /* CloseNormal.png in Resources */ = {isa = PBXBuildFile; fileRef = 46880B7619C43A67006E1F66 /* CloseNormal.png */; };
-		46880B7C19C43A67006E1F66 /* CloseNormal.png in Resources */ = {isa = PBXBuildFile; fileRef = 46880B7619C43A67006E1F66 /* CloseNormal.png */; };
-		46880B7D19C43A67006E1F66 /* CloseSelected.png in Resources */ = {isa = PBXBuildFile; fileRef = 46880B7719C43A67006E1F66 /* CloseSelected.png */; };
-		46880B7E19C43A67006E1F66 /* CloseSelected.png in Resources */ = {isa = PBXBuildFile; fileRef = 46880B7719C43A67006E1F66 /* CloseSelected.png */; };
-		46880B8119C43A67006E1F66 /* HelloWorld.png in Resources */ = {isa = PBXBuildFile; fileRef = 46880B7A19C43A67006E1F66 /* HelloWorld.png */; };
-		46880B8219C43A67006E1F66 /* HelloWorld.png in Resources */ = {isa = PBXBuildFile; fileRef = 46880B7A19C43A67006E1F66 /* HelloWorld.png */; };
 		46880B8819C43A87006E1F66 /* AppDelegate.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 46880B8419C43A87006E1F66 /* AppDelegate.cpp */; };
 		46880B8919C43A87006E1F66 /* AppDelegate.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 46880B8419C43A87006E1F66 /* AppDelegate.cpp */; };
 		46880B8A19C43A87006E1F66 /* HelloWorldScene.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 46880B8619C43A87006E1F66 /* HelloWorldScene.cpp */; };
@@ -47,6 +41,18 @@
 		52B47A471A53D09C004E4C60 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 52B47A461A53D09B004E4C60 /* Security.framework */; };
 		59B79E472258A5F4007FD572 /* PhysicsShapeCache.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 59B79E462258A5F4007FD572 /* PhysicsShapeCache.cpp */; };
 		59B79E482258A5F4007FD572 /* PhysicsShapeCache.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 59B79E462258A5F4007FD572 /* PhysicsShapeCache.cpp */; };
+		59B79E4B2258E25D007FD572 /* Pinball_n.png in Resources */ = {isa = PBXBuildFile; fileRef = 59B79E492258E25D007FD572 /* Pinball_n.png */; };
+		59B79E4C2258E25D007FD572 /* Pinball_n.png in Resources */ = {isa = PBXBuildFile; fileRef = 59B79E492258E25D007FD572 /* Pinball_n.png */; };
+		59B79E4D2258E25D007FD572 /* Pinball.png in Resources */ = {isa = PBXBuildFile; fileRef = 59B79E4A2258E25D007FD572 /* Pinball.png */; };
+		59B79E4E2258E25D007FD572 /* Pinball.png in Resources */ = {isa = PBXBuildFile; fileRef = 59B79E4A2258E25D007FD572 /* Pinball.png */; };
+		59B79E5B2258E681007FD572 /* LightEffect.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 59B79E572258E681007FD572 /* LightEffect.cpp */; };
+		59B79E5C2258E681007FD572 /* LightEffect.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 59B79E572258E681007FD572 /* LightEffect.cpp */; };
+		59B79E5D2258E681007FD572 /* Effect.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 59B79E582258E681007FD572 /* Effect.cpp */; };
+		59B79E5E2258E681007FD572 /* Effect.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 59B79E582258E681007FD572 /* Effect.cpp */; };
+		59B79E5F2258E681007FD572 /* EffectSprite.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 59B79E5A2258E681007FD572 /* EffectSprite.cpp */; };
+		59B79E602258E681007FD572 /* EffectSprite.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 59B79E5A2258E681007FD572 /* EffectSprite.cpp */; };
+		59B79E632258EB78007FD572 /* pointlight.frag in Resources */ = {isa = PBXBuildFile; fileRef = 59B79E622258EB78007FD572 /* pointlight.frag */; };
+		59B79E642258EB78007FD572 /* pointlight.frag in Resources */ = {isa = PBXBuildFile; fileRef = 59B79E622258EB78007FD572 /* pointlight.frag */; };
 		8262943E1AAF051F00CB7CF7 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8262943D1AAF051F00CB7CF7 /* Security.framework */; };
 		BF171245129291EC00B8313A /* OpenGLES.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BF170DB012928DE900B8313A /* OpenGLES.framework */; };
 		BF1712471292920000B8313A /* libz.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = BF170DB412928DE900B8313A /* libz.dylib */; };
@@ -116,9 +122,6 @@
 		288765A40DF7441C002DB57D /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
 		294D0D631D0D56D500F7F5D4 /* CoreText.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreText.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS.sdk/System/Library/Frameworks/CoreText.framework; sourceTree = DEVELOPER_DIR; };
 		3EACC98E19EE6D4300EB3C5E /* res */ = {isa = PBXFileReference; lastKnownFileType = folder; path = res; sourceTree = "<group>"; };
-		46880B7619C43A67006E1F66 /* CloseNormal.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = CloseNormal.png; sourceTree = "<group>"; };
-		46880B7719C43A67006E1F66 /* CloseSelected.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = CloseSelected.png; sourceTree = "<group>"; };
-		46880B7A19C43A67006E1F66 /* HelloWorld.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = HelloWorld.png; sourceTree = "<group>"; };
 		46880B8419C43A87006E1F66 /* AppDelegate.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = AppDelegate.cpp; sourceTree = "<group>"; };
 		46880B8519C43A87006E1F66 /* AppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		46880B8619C43A87006E1F66 /* HelloWorldScene.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = HelloWorldScene.cpp; sourceTree = "<group>"; };
@@ -136,6 +139,15 @@
 		52B47A461A53D09B004E4C60 /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS.sdk/System/Library/Frameworks/Security.framework; sourceTree = DEVELOPER_DIR; };
 		59B79E452258A5F3007FD572 /* PhysicsShapeCache.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PhysicsShapeCache.h; sourceTree = "<group>"; };
 		59B79E462258A5F4007FD572 /* PhysicsShapeCache.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = PhysicsShapeCache.cpp; sourceTree = "<group>"; };
+		59B79E492258E25D007FD572 /* Pinball_n.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Pinball_n.png; sourceTree = "<group>"; };
+		59B79E4A2258E25D007FD572 /* Pinball.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Pinball.png; sourceTree = "<group>"; };
+		59B79E552258E681007FD572 /* Effect.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Effect.h; sourceTree = "<group>"; };
+		59B79E562258E681007FD572 /* EffectSprite.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EffectSprite.h; sourceTree = "<group>"; };
+		59B79E572258E681007FD572 /* LightEffect.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = LightEffect.cpp; sourceTree = "<group>"; };
+		59B79E582258E681007FD572 /* Effect.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Effect.cpp; sourceTree = "<group>"; };
+		59B79E592258E681007FD572 /* LightEffect.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LightEffect.h; sourceTree = "<group>"; };
+		59B79E5A2258E681007FD572 /* EffectSprite.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = EffectSprite.cpp; sourceTree = "<group>"; };
+		59B79E622258EB78007FD572 /* pointlight.frag */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = pointlight.frag; sourceTree = "<group>"; };
 		8262943D1AAF051F00CB7CF7 /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
 		BF170DB012928DE900B8313A /* OpenGLES.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGLES.framework; path = System/Library/Frameworks/OpenGLES.framework; sourceTree = SDKROOT; };
 		BF170DB412928DE900B8313A /* libz.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libz.dylib; path = usr/lib/libz.dylib; sourceTree = SDKROOT; };
@@ -272,11 +284,11 @@
 		46880B7519C43A67006E1F66 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				59B79E622258EB78007FD572 /* pointlight.frag */,
+				59B79E492258E25D007FD572 /* Pinball_n.png */,
+				59B79E4A2258E25D007FD572 /* Pinball.png */,
 				521A8EA819F11F5000D177D7 /* fonts */,
 				3EACC98E19EE6D4300EB3C5E /* res */,
-				46880B7619C43A67006E1F66 /* CloseNormal.png */,
-				46880B7719C43A67006E1F66 /* CloseSelected.png */,
-				46880B7A19C43A67006E1F66 /* HelloWorld.png */,
 			);
 			name = Resources;
 			path = ../Resources;
@@ -285,6 +297,7 @@
 		46880B8319C43A87006E1F66 /* Classes */ = {
 			isa = PBXGroup;
 			children = (
+				59B79E542258E656007FD572 /* Class_EffectSprite */,
 				59B79E432258A5CE007FD572 /* Class_PhysicsShapeCache */,
 				46880B8419C43A87006E1F66 /* AppDelegate.cpp */,
 				46880B8519C43A87006E1F66 /* AppDelegate.h */,
@@ -322,6 +335,19 @@
 				59B79E452258A5F3007FD572 /* PhysicsShapeCache.h */,
 			);
 			name = Class_PhysicsShapeCache;
+			sourceTree = "<group>";
+		};
+		59B79E542258E656007FD572 /* Class_EffectSprite */ = {
+			isa = PBXGroup;
+			children = (
+				59B79E582258E681007FD572 /* Effect.cpp */,
+				59B79E552258E681007FD572 /* Effect.h */,
+				59B79E5A2258E681007FD572 /* EffectSprite.cpp */,
+				59B79E562258E681007FD572 /* EffectSprite.h */,
+				59B79E572258E681007FD572 /* LightEffect.cpp */,
+				59B79E592258E681007FD572 /* LightEffect.h */,
+			);
+			name = Class_EffectSprite;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -426,14 +452,14 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				46880B8119C43A67006E1F66 /* HelloWorld.png in Resources */,
 				1A88B2641FC3D9C9005C14AE /* Images.xcassets in Resources */,
-				46880B7D19C43A67006E1F66 /* CloseSelected.png in Resources */,
 				521A8EA919F11F5000D177D7 /* fonts in Resources */,
 				3EACC98F19EE6D4300EB3C5E /* res in Resources */,
+				59B79E4D2258E25D007FD572 /* Pinball.png in Resources */,
+				59B79E4B2258E25D007FD572 /* Pinball_n.png in Resources */,
 				1AF87B891F6F781D007BE51C /* LaunchScreenBackground.png in Resources */,
-				46880B7B19C43A67006E1F66 /* CloseNormal.png in Resources */,
 				1AF87B881F6F781D007BE51C /* LaunchScreen.storyboard in Resources */,
+				59B79E632258EB78007FD572 /* pointlight.frag in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -441,12 +467,12 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				46880B8219C43A67006E1F66 /* HelloWorld.png in Resources */,
+				59B79E4E2258E25D007FD572 /* Pinball.png in Resources */,
 				503AE0F817EB97AB00D1A890 /* Icon.icns in Resources */,
 				3EACC99019EE6D4300EB3C5E /* res in Resources */,
+				59B79E642258EB78007FD572 /* pointlight.frag in Resources */,
 				521A8EAA19F11F5000D177D7 /* fonts in Resources */,
-				46880B7C19C43A67006E1F66 /* CloseNormal.png in Resources */,
-				46880B7E19C43A67006E1F66 /* CloseSelected.png in Resources */,
+				59B79E4C2258E25D007FD572 /* Pinball_n.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -457,9 +483,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				59B79E5D2258E681007FD572 /* Effect.cpp in Sources */,
+				59B79E5B2258E681007FD572 /* LightEffect.cpp in Sources */,
 				1AF87B781F6F77F7007BE51C /* AppController.mm in Sources */,
 				1AF87B8B1F6F782A007BE51C /* RootViewController.mm in Sources */,
 				59B79E472258A5F4007FD572 /* PhysicsShapeCache.cpp in Sources */,
+				59B79E5F2258E681007FD572 /* EffectSprite.cpp in Sources */,
 				46880B8819C43A87006E1F66 /* AppDelegate.cpp in Sources */,
 				1AF87B8A1F6F7822007BE51C /* main.m in Sources */,
 				46880B8A19C43A87006E1F66 /* HelloWorldScene.cpp in Sources */,
@@ -472,7 +501,10 @@
 			files = (
 				46880B8919C43A87006E1F66 /* AppDelegate.cpp in Sources */,
 				503AE10517EB98FF00D1A890 /* main.cpp in Sources */,
+				59B79E602258E681007FD572 /* EffectSprite.cpp in Sources */,
+				59B79E5C2258E681007FD572 /* LightEffect.cpp in Sources */,
 				59B79E482258A5F4007FD572 /* PhysicsShapeCache.cpp in Sources */,
+				59B79E5E2258E681007FD572 /* Effect.cpp in Sources */,
 				46880B8B19C43A87006E1F66 /* HelloWorldScene.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
