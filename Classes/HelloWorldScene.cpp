@@ -42,81 +42,12 @@ static void problemLoading(const char* filename)
 // on "init" you need to initialize your instance
 bool HelloWorld::init()
 {
-    //////////////////////////////
-    // 1. super init first
     if ( !Scene::init() )
     {
         return false;
     }
 
-    auto visibleSize = Director::getInstance()->getVisibleSize();//返回OPenGL的视图大小
-    Vec2 origin = Director::getInstance()->getVisibleOrigin();//返回原点坐标
 
-    /////////////////////////////
-    // 2. add a menu item with "X" image, which is clicked to quit the program
-    //    you may modify it.
-
-    // add a "close" icon to exit the progress. it's an autorelease object关闭按钮
-    auto closeItem = MenuItemImage::create(
-                                           "CloseNormal.png",
-                                           "CloseSelected.png",
-                                           CC_CALLBACK_1(HelloWorld::menuCloseCallback, this));
-
-    if (closeItem == nullptr ||
-        closeItem->getContentSize().width <= 0 ||
-        closeItem->getContentSize().height <= 0)
-    {
-        problemLoading("'CloseNormal.png' and 'CloseSelected.png'");//报错
-    }
-    else
-	{
-		float x = origin.x + visibleSize.width - closeItem->getContentSize().width;//图标锚点x=原点x+窗口宽-图标宽/2
-        float y = origin.y + closeItem->getContentSize().height/2;//图标锚点y=原点y+图标高/2
-		
-        closeItem->setPosition(Vec2(x,y));//设置关闭图标位置
-    }
-
-    // create menu, it's an autorelease object
-    auto menu = Menu::create(closeItem, NULL);
-	printf("%f,%f,%f!!!!\n",menu->getPositionX(),menu->getPositionY(),menu->getPositionZ());
-	menu->setPosition(Vec2::ZERO);//设置位置
-	this->addChild(menu, 1);//添加关闭按钮
-
-    /////////////////////////////
-    // 3. add your codes below...
-
-    // add a label shows "Hello World"
-    // create and initialize a label
-
-    auto label = Label::createWithTTF("Hello World", "fonts/Marker Felt.ttf", 24);//创建标签设置字体
-    if (label == nullptr)
-    {
-        problemLoading("'fonts/Marker Felt.ttf'");
-    }
-    else
-    {
-        // position the label on the center of the screen设置位置
-        label->setPosition(Vec2(origin.x + visibleSize.width/2,
-                                origin.y + visibleSize.height - label->getContentSize().height));
-
-        // add the label as a child to this layer添加层
-        this->addChild(label, 1);
-    }
-
-    // add "HelloWorld" splash screen"添加图片
-    auto sprite = Sprite::create("HelloWorld.png");
-    if (sprite == nullptr)
-    {
-        problemLoading("'HelloWorld.png'");
-    }
-    else
-    {
-        // position the sprite on the center of the screen
-        sprite->setPosition(Vec2(visibleSize.width/2 + origin.x, visibleSize.height/2 + origin.y));
-
-        // add the sprite as a child to this layer
-        this->addChild(sprite, 0);
-    }
     return true;
 }
 
