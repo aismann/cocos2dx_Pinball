@@ -53,6 +53,10 @@
 		59B79E602258E681007FD572 /* EffectSprite.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 59B79E5A2258E681007FD572 /* EffectSprite.cpp */; };
 		59B79E632258EB78007FD572 /* pointlight.frag in Resources */ = {isa = PBXBuildFile; fileRef = 59B79E622258EB78007FD572 /* pointlight.frag */; };
 		59B79E642258EB78007FD572 /* pointlight.frag in Resources */ = {isa = PBXBuildFile; fileRef = 59B79E622258EB78007FD572 /* pointlight.frag */; };
+		59B79E6F225DDDB2007FD572 /* pinballmap.png in Resources */ = {isa = PBXBuildFile; fileRef = 59B79E6D225DDDB2007FD572 /* pinballmap.png */; };
+		59B79E70225DDDB2007FD572 /* pinballmap.png in Resources */ = {isa = PBXBuildFile; fileRef = 59B79E6D225DDDB2007FD572 /* pinballmap.png */; };
+		59B79E71225DDDB2007FD572 /* pinballmap.plist in Resources */ = {isa = PBXBuildFile; fileRef = 59B79E6E225DDDB2007FD572 /* pinballmap.plist */; };
+		59B79E72225DDDB2007FD572 /* pinballmap.plist in Resources */ = {isa = PBXBuildFile; fileRef = 59B79E6E225DDDB2007FD572 /* pinballmap.plist */; };
 		8262943E1AAF051F00CB7CF7 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8262943D1AAF051F00CB7CF7 /* Security.framework */; };
 		BF171245129291EC00B8313A /* OpenGLES.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BF170DB012928DE900B8313A /* OpenGLES.framework */; };
 		BF1712471292920000B8313A /* libz.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = BF170DB412928DE900B8313A /* libz.dylib */; };
@@ -148,6 +152,8 @@
 		59B79E592258E681007FD572 /* LightEffect.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LightEffect.h; sourceTree = "<group>"; };
 		59B79E5A2258E681007FD572 /* EffectSprite.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = EffectSprite.cpp; sourceTree = "<group>"; };
 		59B79E622258EB78007FD572 /* pointlight.frag */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = pointlight.frag; sourceTree = "<group>"; };
+		59B79E6D225DDDB2007FD572 /* pinballmap.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = pinballmap.png; sourceTree = "<group>"; };
+		59B79E6E225DDDB2007FD572 /* pinballmap.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = pinballmap.plist; sourceTree = "<group>"; };
 		8262943D1AAF051F00CB7CF7 /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
 		BF170DB012928DE900B8313A /* OpenGLES.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGLES.framework; path = System/Library/Frameworks/OpenGLES.framework; sourceTree = SDKROOT; };
 		BF170DB412928DE900B8313A /* libz.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libz.dylib; path = usr/lib/libz.dylib; sourceTree = SDKROOT; };
@@ -284,6 +290,8 @@
 		46880B7519C43A67006E1F66 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				59B79E6E225DDDB2007FD572 /* pinballmap.plist */,
+				59B79E6D225DDDB2007FD572 /* pinballmap.png */,
 				59B79E622258EB78007FD572 /* pointlight.frag */,
 				59B79E492258E25D007FD572 /* Pinball_n.png */,
 				59B79E4A2258E25D007FD572 /* Pinball.png */,
@@ -453,6 +461,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				1A88B2641FC3D9C9005C14AE /* Images.xcassets in Resources */,
+				59B79E6F225DDDB2007FD572 /* pinballmap.png in Resources */,
+				59B79E71225DDDB2007FD572 /* pinballmap.plist in Resources */,
 				521A8EA919F11F5000D177D7 /* fonts in Resources */,
 				3EACC98F19EE6D4300EB3C5E /* res in Resources */,
 				59B79E4D2258E25D007FD572 /* Pinball.png in Resources */,
@@ -469,7 +479,9 @@
 			files = (
 				59B79E4E2258E25D007FD572 /* Pinball.png in Resources */,
 				503AE0F817EB97AB00D1A890 /* Icon.icns in Resources */,
+				59B79E72225DDDB2007FD572 /* pinballmap.plist in Resources */,
 				3EACC99019EE6D4300EB3C5E /* res in Resources */,
+				59B79E70225DDDB2007FD572 /* pinballmap.png in Resources */,
 				59B79E642258EB78007FD572 /* pointlight.frag in Resources */,
 				521A8EAA19F11F5000D177D7 /* fonts in Resources */,
 				59B79E4C2258E25D007FD572 /* Pinball_n.png in Resources */,

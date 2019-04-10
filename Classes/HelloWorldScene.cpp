@@ -26,13 +26,22 @@
 #include "SimpleAudioEngine.h"
 #include "EffectSprite.h"//纹理
 #include "LightEffect.h"//光源
+#include "PhysicsShapeCache.h"//自定义物理体积
 
 
 USING_NS_CC;
 
 Scene* HelloWorld::createScene()
 {
-    return HelloWorld::create();
+	auto scene = Scene::createWithPhysics();//创建物理场景
+	scene->getPhysicsWorld()->setGravity(Vec2(0, -100));//设置重力=0
+	// optional: set debug draw
+	scene->getPhysicsWorld()->setDebugDrawMask(0xffff);//debug
+	
+	auto layer = HelloWorld::create();
+	scene->addChild(layer);
+	
+	return scene;
 }
 
 // Print useful error message instead of segfaulting when files are not there.报错信息
@@ -49,25 +58,73 @@ bool HelloWorld::init()
     {
         return false;
     }
-
 	
+	//地图
+	PhysicsShapeCache * shapeCache = PhysicsShapeCache::getInstance();
+	shapeCache->addShapesWithFile("pinballmap.plist");
+	
+	auto pinballmap = Sprite::create("pinballmap.png");
+	shapeCache->setBodyOnSprite("Image004.png", pinballmap);
+	pinballmap->setPosition(0,0);
+	Vec2 Size = Director::getInstance()->getVisibleSize();//图尺寸
+	Vec2 origin = Director::getInstance()->getVisibleOrigin();//原点位置
+	pinballmap->setPosition(origin.x + Size.x/2 , origin.y + Size.y/2);//设置地图位置
+	pinballmap->setScale(1.43);
+	
+	this->addChild(pinballmap);
+	
+	
+	
+	//球
 	auto pinBallSprite = EffectSprite::create("Pinball.png");//纹理原图
-	pinBallSprite->setPosition(200,200);
+	pinBallSprite->setPosition(origin.x + Size.x - 20 , 100);
 	pinBallSprite->setScale(0.2);
+	auto pinballPH = PhysicsBody::createCircle(40);
+	pinballPH->setMass(1);//质量
+	pinballPH->setLinearDamping(0);//线性摩擦力
+	pinBallSprite->setPhysicsBody(pinballPH);
 	this->addChild(pinBallSprite, 1);
-	
+	//点光源
 	auto pointLight = LightEffect::create();//光源
 	pointLight->retain();//保持光源
 	Vec3 lightPos(100, 100, 100);
 	pointLight->setLightPos(lightPos);
 	pointLight->setLightCutoffRadius(1000);//无影响半径
-	pointLight->setBrightness(1.0);//亮度
+	pointLight->setBrightness(2.0);//亮度
 //	pointLight->setLightColor(cocos2d::Color3B::WHITE);//颜色
 	pinBallSprite->setEffect(pointLight, "Pinball_n.png");//纹理+光源
 	
 
+	
+	
+	//监听键盘
+	auto dirListener = Director::getInstance()->getEventDispatcher();
+	auto keyboardListener = EventListenerKeyboard::create();
+	keyboardListener->onKeyPressed = [this](EventKeyboard::KeyCode keyCode, Event* event){
+		this->keyDown[(int)keyCode] = true;
+		printf("pressdown %d \n", keyCode);
+	};
+	keyboardListener->onKeyReleased = [this](EventKeyboard::KeyCode keyCode, Event* event){
+		this->keyDown[(int)keyCode] = false;
+		printf("release %d\n", keyCode);
+	};
+	dirListener->addEventListenerWithSceneGraphPriority(keyboardListener, this);
+	
+	
+	this->scheduleUpdate();//每帧更新
     return true;
 }
+
+
+//每帧更新
+void HelloWorld::update(float delta)
+{
+	
+	
+}
+
+
+
 
 
 void HelloWorld::menuCloseCallback(Ref* pSender)//关闭函数

@@ -39,6 +39,12 @@ public:
     
     // implement the "static create()" method manually
     CREATE_FUNC(HelloWorld);
+	//每帧更新
+	void update(float delta) override;
+	
+private:
+	bool keyDown[200];
+	
 };
 
 #endif // __HELLOWORLD_SCENE_H__
