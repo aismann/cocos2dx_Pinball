@@ -76,14 +76,16 @@ bool HelloWorld::init()
 	
 	
 	//球
-	auto pinBallSprite = EffectSprite::create("Pinball.png");//纹理原图
-	pinBallSprite->setPosition(origin.x + Size.x - 20 , 100);
-	pinBallSprite->setScale(0.2);
-	auto pinballPH = PhysicsBody::createCircle(40);
+	auto pinballSprite = EffectSprite::create("Pinball.png");//纹理原图
+	pinballSprite->setPosition(origin.x + Size.x - 20 , 100);
+	pinballSprite->setScale(0.2);
+	
+	auto pinballPH = PhysicsBody::createCircle(40, PhysicsMaterial(1, 2, 0));
 	pinballPH->setMass(1);//质量
 	pinballPH->setLinearDamping(0);//线性摩擦力
-	pinBallSprite->setPhysicsBody(pinballPH);
-	this->addChild(pinBallSprite, 1);
+	pinballSprite->setPhysicsBody(pinballPH);
+	this->addChild(pinballSprite, 1);
+	
 	//点光源
 	auto pointLight = LightEffect::create();//光源
 	pointLight->retain();//保持光源
@@ -92,16 +94,21 @@ bool HelloWorld::init()
 	pointLight->setLightCutoffRadius(1000);//无影响半径
 	pointLight->setBrightness(2.0);//亮度
 //	pointLight->setLightColor(cocos2d::Color3B::WHITE);//颜色
-	pinBallSprite->setEffect(pointLight, "Pinball_n.png");//纹理+光源
+	pinballSprite->setEffect(pointLight, "Pinball_n.png");//纹理+光源
 	
 
 	
-	
 	//监听键盘
+	this->star = 0;
 	auto dirListener = Director::getInstance()->getEventDispatcher();
 	auto keyboardListener = EventListenerKeyboard::create();
-	keyboardListener->onKeyPressed = [this](EventKeyboard::KeyCode keyCode, Event* event){
+	keyboardListener->onKeyPressed = [this,pinballPH](EventKeyboard::KeyCode keyCode, Event* event){
 		this->keyDown[(int)keyCode] = true;
+		if(!star && keyDown[(int)EventKeyboard::KeyCode::KEY_SPACE])
+		{
+			this->star = 1;
+			pinballPH->applyImpulse(Vec2(0,1000));//冲量
+		}
 		printf("pressdown %d \n", keyCode);
 	};
 	keyboardListener->onKeyReleased = [this](EventKeyboard::KeyCode keyCode, Event* event){

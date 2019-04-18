@@ -44,6 +44,7 @@ public:
 	
 private:
 	bool keyDown[200];
+	bool star;//开始标记
 	
 };
 
