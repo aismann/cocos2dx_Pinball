@@ -34,13 +34,15 @@ USING_NS_CC;
 Scene* HelloWorld::createScene()
 {
 	auto scene = Scene::createWithPhysics();//创建物理场景
-	scene->getPhysicsWorld()->setGravity(Vec2(0, -100));//设置重力=0
+	scene->getPhysicsWorld()->setGravity(Vec2(0, -50));//设置重力=0
 	// optional: set debug draw
 	scene->getPhysicsWorld()->setDebugDrawMask(0xffff);//debug
 	
 	auto layer = HelloWorld::create();
 	scene->addChild(layer);
 	
+	//防止刚体穿透
+	scene->getPhysicsWorld()->setAutoStep(false);
 	return scene;
 }
 
@@ -60,9 +62,8 @@ bool HelloWorld::init()
     }
 	
 	//地图
-	PhysicsShapeCache * shapeCache = PhysicsShapeCache::getInstance();
+	PhysicsShapeCache *shapeCache = PhysicsShapeCache::getInstance();
 	shapeCache->addShapesWithFile("pinballmap.plist");
-	
 	auto pinballmap = Sprite::create("pinballmap.png");
 	shapeCache->setBodyOnSprite("Image004.png", pinballmap);
 	pinballmap->setPosition(0,0);
@@ -70,8 +71,33 @@ bool HelloWorld::init()
 	Vec2 origin = Director::getInstance()->getVisibleOrigin();//原点位置
 	pinballmap->setPosition(origin.x + Size.x/2 , origin.y + Size.y/2);//设置地图位置
 	pinballmap->setScale(1.43);
-	
 	this->addChild(pinballmap);
+	
+	//挡板
+	auto L = EffectSprite::create("L.png");//挡板原图
+	L->setPosition(origin.x + Size.x/3 - 30 , 50);
+	L->setScale(0.51);
+	auto R = EffectSprite::create("R.png");
+	R->setPosition(Size.x - Size.x/3 + 20, 50);
+	R->setScale(0.51);
+	//挡板光
+	auto pointLight = LightEffect::create();//光源
+	pointLight->retain();//保持光源
+	pointLight->setLightPos(Vec3(origin.x + Size.x/3 - 40, 70, 30));//光源位置
+	pointLight->setLightCutoffRadius(1000);//无影响半径
+	pointLight->setBrightness(2.0);//亮度
+	L->setEffect(pointLight, "L_n.png");
+	R->setEffect(pointLight, "R_n.png");
+	//挡板物理
+	PhysicsShapeCache *LPh = PhysicsShapeCache::getInstance();
+	LPh->addShapesWithFile("L&R.plist");
+	LPh->setBodyOnSprite("L.png", L);//绑定物理
+	PhysicsShapeCache *RPh = PhysicsShapeCache::getInstance();
+	RPh->setBodyOnSprite("R.png", R);//绑定物理
+	L->setRotation(30);
+	R->setRotation(-30);
+	this->addChild(L);
+	this->addChild(R);
 	
 	
 	
@@ -80,14 +106,16 @@ bool HelloWorld::init()
 	pinballSprite->setPosition(origin.x + Size.x - 20 , 100);
 	pinballSprite->setScale(0.2);
 	
-	auto pinballPH = PhysicsBody::createCircle(40, PhysicsMaterial(1, 2, 0));
+	auto pinballPH = PhysicsBody::createCircle(40);
+	pinballPH->getShape(0)->setRestitution(3);//设置弹性
 	pinballPH->setMass(1);//质量
 	pinballPH->setLinearDamping(0);//线性摩擦力
+	pinballPH->setRotationEnable(false);//球不可旋转
 	pinballSprite->setPhysicsBody(pinballPH);
 	this->addChild(pinballSprite, 1);
 	
 	//点光源
-	auto pointLight = LightEffect::create();//光源
+	pointLight = LightEffect::create();//光源
 	pointLight->retain();//保持光源
 	Vec3 lightPos(100, 100, 100);
 	pointLight->setLightPos(lightPos);
@@ -95,24 +123,57 @@ bool HelloWorld::init()
 	pointLight->setBrightness(2.0);//亮度
 //	pointLight->setLightColor(cocos2d::Color3B::WHITE);//颜色
 	pinballSprite->setEffect(pointLight, "Pinball_n.png");//纹理+光源
-	
-
-	
+	//设置锚点
+	L->setAnchorPoint(Vec2(0,0.5));
+	R->setAnchorPoint(Vec2(1,0.5));
 	//监听键盘
 	this->star = 0;
 	auto dirListener = Director::getInstance()->getEventDispatcher();
 	auto keyboardListener = EventListenerKeyboard::create();
-	keyboardListener->onKeyPressed = [this,pinballPH](EventKeyboard::KeyCode keyCode, Event* event){
+	keyboardListener->onKeyPressed = [this,pinballPH,L,R,pinballSprite,origin,Size](EventKeyboard::KeyCode keyCode, Event* event){
 		this->keyDown[(int)keyCode] = true;
+		if (keyDown[(int)EventKeyboard::KeyCode::KEY_Z])
+		{
+			//旋转动画
+//			auto actionToL=cocos2d::RotateTo::create(0.1,-30);//时间 度数
+//			auto actionL = cocos2d::Sequence::create(actionToL, NULL);
+//			L->runAction(actionL->clone());
+			L->getPhysicsBody()->setAngularVelocity(-100);
+		}
+		if (keyDown[(int)EventKeyboard::KeyCode::KEY_M])
+		{
+			//旋转动画
+			auto actionToR=cocos2d::RotateTo::create(0.1,30);//时间 度数
+			auto actionR = cocos2d::Sequence::create(actionToR, NULL);
+			R->runAction(actionR->clone());
+		}
 		if(!star && keyDown[(int)EventKeyboard::KeyCode::KEY_SPACE])
 		{
 			this->star = 1;
 			pinballPH->applyImpulse(Vec2(0,1000));//冲量
 		}
+		if(star && keyDown[(int)EventKeyboard::KeyCode::KEY_R])
+		{
+			pinballSprite->setPosition(origin.x + Size.x - 20 , 100);
+			pinballSprite->setRotation(0);
+			star=0;
+		}
 		printf("pressdown %d \n", keyCode);
 	};
-	keyboardListener->onKeyReleased = [this](EventKeyboard::KeyCode keyCode, Event* event){
+	keyboardListener->onKeyReleased = [this,L,R](EventKeyboard::KeyCode keyCode, Event* event){
 		this->keyDown[(int)keyCode] = false;
+		if (!keyDown[(int)EventKeyboard::KeyCode::KEY_Z])
+		{
+			auto actionToL=cocos2d::RotateTo::create(0.1,30);//时间 度数
+			auto actionL = cocos2d::Sequence::create(actionToL, NULL);
+			L->runAction(actionL->clone());
+		}
+		if (!keyDown[(int)EventKeyboard::KeyCode::KEY_M])
+		{
+			auto actionToR=cocos2d::RotateTo::create(0.1,-30);//时间 度数
+			auto actionR = cocos2d::Sequence::create(actionToR, NULL);
+			R->runAction(actionR->clone());
+		}
 		printf("release %d\n", keyCode);
 	};
 	dirListener->addEventListenerWithSceneGraphPriority(keyboardListener, this);
@@ -126,7 +187,11 @@ bool HelloWorld::init()
 //每帧更新
 void HelloWorld::update(float delta)
 {
-	
+	// use fixed time and calculate 3 times per frame makes physics simulate more precisely.
+	for (int i = 0; i < 100; ++i)
+	{
+		getScene()->getPhysicsWorld()->step(1/1800.0f);
+	}
 	
 }
 
@@ -146,3 +211,5 @@ void HelloWorld::menuCloseCallback(Ref* pSender)//关闭函数
 
 
 }
+
+
