@@ -61,116 +61,132 @@ bool HelloWorld::init()
         return false;
     }
 	
+	//导入物理文件
+	PhysicsShapeCache *PhyFile = PhysicsShapeCache::getInstance();
+	PhyFile->addShapesWithFile("re/ball&flipper&map.plist");
+	
 	//地图
-	PhysicsShapeCache *shapeCache = PhysicsShapeCache::getInstance();
-	shapeCache->addShapesWithFile("pinballmap.plist");
-	auto pinballmap = Sprite::create("pinballmap.png");
-	shapeCache->setBodyOnSprite("Image004.png", pinballmap);
-	pinballmap->setPosition(0,0);
+	auto pinballmap = Sprite::create("re/map.png");
+	PhyFile->setBodyOnSprite("map.png", pinballmap);
+	pinballmap->setPosition(50,0);
 	Vec2 Size = Director::getInstance()->getVisibleSize();//图尺寸
 	Vec2 origin = Director::getInstance()->getVisibleOrigin();//原点位置
-	pinballmap->setPosition(origin.x + Size.x/2 , origin.y + Size.y/2);//设置地图位置
-	pinballmap->setScale(1.43);
+	//pinballmap->setPosition(origin.x + Size.x/2 , origin.y + Size.y/2);//设置地图位置
+//	pinballmap->setPosition(origin.x, origin.y);
+	//pinballmap->setScale(1.43);
 	this->addChild(pinballmap);
 	
 	//挡板
-	auto L = EffectSprite::create("L.png");//挡板原图
-	L->setPosition(origin.x + Size.x/3 - 30 , 50);
-	L->setScale(0.51);
-	auto R = EffectSprite::create("R.png");
-	R->setPosition(Size.x - Size.x/3 + 20, 50);
-	R->setScale(0.51);
-	//挡板光
-	auto pointLight = LightEffect::create();//光源
-	pointLight->retain();//保持光源
-	pointLight->setLightPos(Vec3(origin.x + Size.x/3 - 40, 70, 30));//光源位置
-	pointLight->setLightCutoffRadius(1000);//无影响半径
-	pointLight->setBrightness(2.0);//亮度
-	L->setEffect(pointLight, "L_n.png");
-	R->setEffect(pointLight, "R_n.png");
+	auto L = EffectSprite::create("re/leftflipper.png");//挡板原图
+	L->setPosition(origin.x + 245 , 50);
+	L->setScale(2);
+	auto R = EffectSprite::create("re/rightflipper.png");
+	R->setPosition(Size.x - 295, 50);
+	R->setScale(2);
+//	//挡板光
+//	auto pointLight = LightEffect::create();//光源
+//	pointLight->retain();//保持光源
+//	pointLight->setLightPos(Vec3(origin.x + Size.x/3 - 40, 70, 30));//光源位置
+//	pointLight->setLightCutoffRadius(1000);//无影响半径
+//	pointLight->setBrightness(2.0);//亮度
+//	L->setEffect(pointLight, "L_n.png");
+//	R->setEffect(pointLight, "R_n.png");
 	//挡板物理
-	PhysicsShapeCache *LPh = PhysicsShapeCache::getInstance();
-	LPh->addShapesWithFile("L&R.plist");
-	LPh->setBodyOnSprite("L.png", L);//绑定物理
-	PhysicsShapeCache *RPh = PhysicsShapeCache::getInstance();
-	RPh->setBodyOnSprite("R.png", R);//绑定物理
+//	PhysicsShapeCache *LPh = PhysicsShapeCache::getInstance();
+//	LPh->addShapesWithFile("L&R.plist");
+	PhyFile->setBodyOnSprite("leftflipper.png", L);//绑定物理
+//	PhysicsShapeCache *RPh = PhysicsShapeCache::getInstance();
+	PhyFile->setBodyOnSprite("rightflipper.png", R);//绑定物理
+	L->getPhysicsBody()->setMass(10000);
 	L->setRotation(30);
 	R->setRotation(-30);
 	this->addChild(L);
 	this->addChild(R);
-	
-	
-	
+
+	Vec2 ballLocation(origin.x + 900 , 100);
 	//球
-	auto pinballSprite = EffectSprite::create("Pinball.png");//纹理原图
-	pinballSprite->setPosition(origin.x + Size.x - 20 , 100);
-	pinballSprite->setScale(0.2);
-	
-	auto pinballPH = PhysicsBody::createCircle(40);
-	pinballPH->getShape(0)->setRestitution(3);//设置弹性
-	pinballPH->setMass(1);//质量
-	pinballPH->setLinearDamping(0);//线性摩擦力
-	pinballPH->setRotationEnable(false);//球不可旋转
-	pinballSprite->setPhysicsBody(pinballPH);
+	auto pinballSprite = EffectSprite::create("re/ball.png");
+	pinballSprite->setPosition(ballLocation);
+//	pinballSprite->setScale(0.2);
+	PhyFile->setBodyOnSprite("ball.png", pinballSprite);
+//	auto pinballPH = PhysicsBody::createCircle(40);
+//	pinballPH->getShape(0)->setRestitution(3);//设置弹性
+	pinballSprite->getPhysicsBody()->setMass(0.5);//质量
+//	pinballPH->setLinearDamping(0);//线性摩擦力
+//	pinballPH->setRotationEnable(false);//球不可旋转
+//	pinballSprite->setPhysicsBody(pinballPH);
 	this->addChild(pinballSprite, 1);
 	
-	//点光源
-	pointLight = LightEffect::create();//光源
-	pointLight->retain();//保持光源
-	Vec3 lightPos(100, 100, 100);
-	pointLight->setLightPos(lightPos);
-	pointLight->setLightCutoffRadius(1000);//无影响半径
-	pointLight->setBrightness(2.0);//亮度
-//	pointLight->setLightColor(cocos2d::Color3B::WHITE);//颜色
-	pinballSprite->setEffect(pointLight, "Pinball_n.png");//纹理+光源
-	//设置锚点
-	L->setAnchorPoint(Vec2(0,0.5));
-	R->setAnchorPoint(Vec2(1,0.5));
+	
+	
+//	//点光源
+//	pointLight = LightEffect::create();//光源
+//	pointLight->retain();//保持光源
+//	Vec3 lightPos(100, 100, 100);
+//	pointLight->setLightPos(lightPos);
+//	pointLight->setLightCutoffRadius(1000);//无影响半径
+//	pointLight->setBrightness(2.0);//亮度
+////	pointLight->setLightColor(cocos2d::Color3B::WHITE);//颜色
+//	pinballSprite->setEffect(pointLight, "Pinball_n.png");//纹理+光源
+//	//设置锚点
+//	L->setAnchorPoint(Vec2(0,0.5));
+//	R->setAnchorPoint(Vec2(1,0.5));
 	//监听键盘
 	this->star = 0;
 	auto dirListener = Director::getInstance()->getEventDispatcher();
 	auto keyboardListener = EventListenerKeyboard::create();
-	keyboardListener->onKeyPressed = [this,pinballPH,L,R,pinballSprite,origin,Size](EventKeyboard::KeyCode keyCode, Event* event){
+	keyboardListener->onKeyPressed = [this,L,R,ballLocation,pinballSprite,origin,Size](EventKeyboard::KeyCode keyCode, Event* event){
 		this->keyDown[(int)keyCode] = true;
 		if (keyDown[(int)EventKeyboard::KeyCode::KEY_Z])
 		{
-			//旋转动画
-//			auto actionToL=cocos2d::RotateTo::create(0.1,-30);//时间 度数
-//			auto actionL = cocos2d::Sequence::create(actionToL, NULL);
-//			L->runAction(actionL->clone());
-			L->getPhysicsBody()->setAngularVelocity(-100);
+//			PhysicsMaterial toPowerful(1, 3, 0);
+			//L->getPhysicsBody()->getFirstShape()->setRestitution(100);
+//			L->getPhysicsBody()->applyTorque(1000);
+//			pinballSprite->getPhysicsBody()->getFirstShape()->setRestitution(100);
+			//旋转动画(导致刚体穿透)
+			auto actionToL=cocos2d::RotateTo::create(0.1,-30);//时间 度数
+			auto actionL = cocos2d::Sequence::create(actionToL, NULL);
+			L->runAction(actionL->clone());
+			/*
+			L->getPhysicsBody()->setAngularVelocity(100);
+			目前解决方法是让挡板有一个初始速度，让它转一定的时间后停止
+			L->getPhysicsBody()->setAngularVelocity(0);
+			 */
 		}
 		if (keyDown[(int)EventKeyboard::KeyCode::KEY_M])
 		{
-			//旋转动画
+			//旋转动画（导致刚体穿透）
 			auto actionToR=cocos2d::RotateTo::create(0.1,30);//时间 度数
 			auto actionR = cocos2d::Sequence::create(actionToR, NULL);
 			R->runAction(actionR->clone());
 		}
-		if(!star && keyDown[(int)EventKeyboard::KeyCode::KEY_SPACE])
+		if(!star && keyDown[(int)EventKeyboard::KeyCode::KEY_SPACE])//开始
 		{
 			this->star = 1;
-			pinballPH->applyImpulse(Vec2(0,1000));//冲量
+			pinballSprite->getPhysicsBody()->applyImpulse(Vec2(0,1000));//冲量
 		}
-		if(star && keyDown[(int)EventKeyboard::KeyCode::KEY_R])
+		if(star && keyDown[(int)EventKeyboard::KeyCode::KEY_R])//重新
 		{
-			pinballSprite->setPosition(origin.x + Size.x - 20 , 100);
+			pinballSprite->setPosition(ballLocation);
 			pinballSprite->setRotation(0);
 			star=0;
 		}
 		printf("pressdown %d \n", keyCode);
 	};
+	//按键释放
 	keyboardListener->onKeyReleased = [this,L,R](EventKeyboard::KeyCode keyCode, Event* event){
 		this->keyDown[(int)keyCode] = false;
 		if (!keyDown[(int)EventKeyboard::KeyCode::KEY_Z])
 		{
-			auto actionToL=cocos2d::RotateTo::create(0.1,30);//时间 度数
+			//旋转动画（导致刚体穿透）
+			auto actionToL=cocos2d::RotateTo::create(0.05,30);//时间 度数
 			auto actionL = cocos2d::Sequence::create(actionToL, NULL);
 			L->runAction(actionL->clone());
 		}
 		if (!keyDown[(int)EventKeyboard::KeyCode::KEY_M])
 		{
-			auto actionToR=cocos2d::RotateTo::create(0.1,-30);//时间 度数
+			//旋转动画（导致刚体穿透）
+			auto actionToR=cocos2d::RotateTo::create(0.05,-30);//时间 度数
 			auto actionR = cocos2d::Sequence::create(actionToR, NULL);
 			R->runAction(actionR->clone());
 		}
